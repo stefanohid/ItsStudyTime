@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name" translatable="false">ItsStudyTime</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="exam">Exam Name</string>
+    <string name="date">Date:</string>
+    <string name="exam_name">Enter your exam name:</string>
+    <string name="positive_button" translatable="false">Ok</string>
+    <string name="negative_button">Cancel</string>
+    <string name="exam_snackbar">Exam successfully set on</string>
+    <string name="good_luck">Good Luck!</string>
+    <string name="exam_details">Set Details</string>
+    <string name="grade">Grade:</string>
+    <string name="study_time_hours">Study time (hours):</string>
+    <string name="empty_string">You must give a name to your exam. Retry!</string>
+    <string name="completed_exam">Completed</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="about_us">About Us</string>
+    <string name="lets_study">Let\'s study!</string>
+    <string name="set_grade">Congratulations! What grade did you get?</string>
+    <string name="empty_grade">You must give a valid grade. Retry!</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="study_time">Study Time</string>
+    <string name="study_hours">For how long did you study (in hours)?</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+</resources>
