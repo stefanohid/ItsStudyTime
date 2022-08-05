@@ -24,6 +24,12 @@ public interface EsameDAO {
     @Update
     void update(Esame esame);
 
+    @Query("UPDATE table_esame SET isPrevious = :previous WHERE id =:id")
+    void updatePrevious(boolean previous, int id);
+
+    @Query("UPDATE table_esame SET study_time = :studyTime WHERE id =:id")
+    void updateStudyTime(Long studyTime, int id);
+
 
 }
 

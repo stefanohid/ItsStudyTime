@@ -1,17 +1,24 @@
 package com.example.itsstudytime;
 
+
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.itsstudytime.database.Esame;
 import com.example.itsstudytime.database.EsameDB;
+import com.example.itsstudytime.notifications.NotificationReceiver;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
@@ -20,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -45,18 +53,29 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     protected static EsameAdapter adapter;
     LinearLayoutManager layoutManager;
-    SwipeRefreshLayout swipeRefreshLayout;
+    static SwipeRefreshLayout swipeRefreshLayout;
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     static EsameDB db;
     static CoordinatorLayout cL;
+    public static final String CHANNEL_ID = "CHANNEL_ID";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        createNotificationChannel();
+
+
+
+//        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),
+//                1000 * 60 * 60 * 24, pendingIntent);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         setSupportActionBar(binding.toolbar);
 
@@ -123,6 +142,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.clear();
+        adapter.addAll((ArrayList<Esame>) db.esameDAO().getEsami());
     }
 
     @Override
@@ -189,17 +220,21 @@ public class MainActivity extends AppCompatActivity {
                                     previous = true;
                                 }
 
-                                String date;
-                                if (Locale.getDefault().getLanguage().contentEquals("en")) {
-                                    date = (month+1) + "/" + dayOfMonth + "/" + year;
-                                } else {
-                                    date = dayOfMonth + "/" + (month+1) + "/" + year;
-                                }
+                                String m = String.valueOf(month+1);
+                                if (month+1<10) {
+                                    m = String.format("%02d", month+1);;
+                                };
+
+                                String date = String.valueOf(year) + "-" + m + "-" + String.valueOf(dayOfMonth);
+
                                 Esame nuovoEsame = new Esame(n.getText().toString(), date);
                                 nuovoEsame.setPrevious(previous);
+                                nuovoEsame.setStudyTime(0L);
+
                                 db.esameDAO().insertAll(nuovoEsame);
                                 adapter.addEsame(nuovoEsame);
                                 Snackbar.make(cL, cL.getResources().getString(R.string.exam_snackbar) + " " + date, Snackbar.LENGTH_LONG).show();
+
 
                             }
 
@@ -249,5 +284,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "StudyTime", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("This is a test");
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
 }

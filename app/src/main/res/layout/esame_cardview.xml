@@ -9,7 +9,7 @@
     app:cardElevation="10dp"
     app:cardMaxElevation="12dp"
     app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true" >
 
     <TextView
         android:id="@+id/print_nome"
@@ -47,6 +47,16 @@
         android:layout_marginTop="120dp"
         android:layout_marginBottom="150dp"
         android:text="@string/study_time_hours"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="120dp"
+        android:text="0"
+        android:textAlignment="center"
         android:textSize="18sp" />
 
     <CheckBox

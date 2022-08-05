@@ -3,6 +3,7 @@ package com.example.itsstudytime;
 import static com.example.itsstudytime.DetailedExamList.POS;
 import static com.example.itsstudytime.DetailedExamList.SERIA;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Update;
 
 import com.example.itsstudytime.database.Esame;
+import com.example.itsstudytime.dates.DateFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,8 @@ import java.util.List;
 public class EsameAdapter extends RecyclerView.Adapter<EsameAdapter.ViewHolder> {
     private ArrayList<Esame> esami;
     private AppCompatActivity activity;
+
+    NotificationCompat.Builder notifBuilder;
 
     public EsameAdapter(AppCompatActivity activity, List<Esame> esami)  {
         this.esami = (ArrayList<Esame>) esami;
@@ -69,7 +75,7 @@ public class EsameAdapter extends RecyclerView.Adapter<EsameAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.nome.setText(esami.get(position).getNome());
-        holder.data.setText(esami.get(position).getData());
+        holder.data.setText(DateFormatter.formatDate(esami.get(position).getData()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +85,8 @@ public class EsameAdapter extends RecyclerView.Adapter<EsameAdapter.ViewHolder> 
                 intent.putExtra(SERIA, esami.get(position));
                 intent.putExtra(POS, position);
                 activity.startActivity(intent);
+
+
             }
         });
 
