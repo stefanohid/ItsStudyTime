@@ -1,0 +1,76 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "5b31defc932e6303247a202668f2ae4b",
+    "entities": [
+      {
+        "tableName": "table_esame",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome_esame` TEXT, `data_esame` TEXT, `voto_esame` INTEGER NOT NULL, `isLode` INTEGER NOT NULL, `isPrevious` INTEGER NOT NULL, `paused_activity` TEXT, `study_time` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome",
+            "columnName": "nome_esame",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "data",
+            "columnName": "data_esame",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "voto",
+            "columnName": "voto_esame",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lode",
+            "columnName": "isLode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPrevious",
+            "columnName": "isPrevious",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pauseActivity",
+            "columnName": "paused_activity",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "studyTime",
+            "columnName": "study_time",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5b31defc932e6303247a202668f2ae4b')"
+    ]
+  }
+}
