@@ -86,7 +86,6 @@ public class EsameAdapter extends RecyclerView.Adapter<EsameAdapter.ViewHolder> 
                 intent.putExtra(POS, position);
                 activity.startActivity(intent);
 
-
             }
         });
 

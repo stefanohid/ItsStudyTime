@@ -18,6 +18,9 @@ public interface EsameDAO {
     @Insert
     void insertAll(Esame... esami);
 
+    @Insert
+    void insert(Esame esame);
+
     @Delete
     void delete(Esame esame);
 
@@ -30,6 +33,7 @@ public interface EsameDAO {
     @Query("UPDATE table_esame SET study_time = :studyTime WHERE id =:id")
     void updateStudyTime(Long studyTime, int id);
 
-
+    @Query("DELETE FROM table_esame")
+    void nukeEsami();
 }
 

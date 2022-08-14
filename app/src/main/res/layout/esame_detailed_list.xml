@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/send_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/fab_margin"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="startChronometer"
-        android:text="Start"
+        android:text="@string/start"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:onClick="pauseChronometer"
-        android:text="Pause"
+        android:text="@string/pause"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -74,13 +74,13 @@
         app:layout_constraintTop_toBottomOf="@+id/start_button" />
 
     <Button
-        android:id="@+id/stop_button"
+        android:id="@+id/reset_button"
         android:layout_width="93dp"
         android:layout_height="51dp"
         android:layout_marginTop="10dp"
         android:cursorVisible="false"
         android:onClick="resetChronometer"
-        android:text="Reset"
+        android:text="@string/reset"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

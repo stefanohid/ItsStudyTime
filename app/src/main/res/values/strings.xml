@@ -18,7 +18,7 @@
     <string name="good_luck">Good Luck!</string>
     <string name="exam_details">Set Details</string>
     <string name="grade">Grade:</string>
-    <string name="study_time_hours">Study time (hours):</string>
+    <string name="study_time">Study time (hours):</string>
     <string name="empty_string">You must give a name to your exam. Retry!</string>
     <string name="completed_exam">Completed</string>
     <string name="title_activity_settings">Settings</string>
@@ -28,9 +28,16 @@
     <string name="empty_grade">You must give a valid grade. Retry!</string>
     <string name="start">Start</string>
     <string name="pause">Pause</string>
-    <string name="reset">Reset</string>
-    <string name="study_time">Study Time</string>
-    <string name="study_hours">For how long did you study (in hours)?</string>
+    <string name="reset" translatable="false">Reset</string>
+    <string name="lode">Cum Laude</string>
+    <string name="duplicate">Can\'t add a new exam with a duplicate name!</string>
+    <string name="exam_mail">My Exam</string>
+    <string name="aboutus">
+        Concentration is key for getting good results in studying, just as much as being able to plan correctly every study session. However, concentration needs a rest every once in a while, especially for people who tend to get easily distracted.\n\n
+        DeskTime has come up with a theory for productivity based on a 52:17 work / rest ratio which shows how the most productive people in the world thrive daily. This app applies this theory to study sessions, as one hour of uninterrupted dedication is rewarded with a 20 minute break.
+        ItsStudyTime works also as an exam planner with unique features that allow to store, check and share exam data.\n\n
+        Be productive without overworking yourself. Prepare your next exam with ItsStudyTime!
+     </string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

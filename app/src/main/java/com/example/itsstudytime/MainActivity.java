@@ -1,6 +1,7 @@
 package com.example.itsstudytime;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -11,6 +12,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -18,12 +20,16 @@ import android.os.Bundle;
 
 import com.example.itsstudytime.database.Esame;
 import com.example.itsstudytime.database.EsameDB;
+import com.example.itsstudytime.dates.DateFormatter;
 import com.example.itsstudytime.notifications.NotificationReceiver;
+import com.example.itsstudytime.notifications.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -59,19 +65,18 @@ public class MainActivity extends AppCompatActivity {
     static EsameDB db;
     static CoordinatorLayout cL;
     public static final String CHANNEL_ID = "CHANNEL_ID";
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
-
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         createNotificationChannel();
 
-
-
-//        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),
-//                1000 * 60 * 60 * 24, pendingIntent);
+        prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        editor = prefs.edit();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -147,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -172,6 +175,9 @@ public class MainActivity extends AppCompatActivity {
          int id = item.getItemId();
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this.getApplicationContext(), Settings.class);
+            startActivity(intent);
+        } else if (id == R.id.about_us) {
+            Intent intent = new Intent(this.getApplicationContext(), AboutUs.class);
             startActivity(intent);
         }
 
@@ -231,10 +237,22 @@ public class MainActivity extends AppCompatActivity {
                                 nuovoEsame.setPrevious(previous);
                                 nuovoEsame.setStudyTime(0L);
 
-                                db.esameDAO().insertAll(nuovoEsame);
-                                adapter.addEsame(nuovoEsame);
-                                Snackbar.make(cL, cL.getResources().getString(R.string.exam_snackbar) + " " + date, Snackbar.LENGTH_LONG).show();
+                                boolean checkNome = false;
+                                for(Esame e : db.esameDAO().getEsami()) {
+                                    if(e.getNome().equals(nuovoEsame.getNome())) {
+                                        checkNome = true;
+                                        Snackbar.make(cL, cL.getResources().getString(R.string.duplicate) + " ", Snackbar.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                }
 
+                                if(!checkNome) {
+                                    db.esameDAO().insert(nuovoEsame);
+                                    adapter.addEsame(nuovoEsame);
+                                    adapter.clear();
+                                    adapter.addAll((ArrayList<Esame>) db.esameDAO().getEsami());
+                                    Snackbar.make(cL, cL.getResources().getString(R.string.exam_snackbar) + " " + DateFormatter.formatDate(date), Snackbar.LENGTH_LONG).show();
+                                }
 
                             }
 
@@ -292,7 +310,6 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "StudyTime", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("This is a test");
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
