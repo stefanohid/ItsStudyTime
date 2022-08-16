@@ -26,17 +26,20 @@ import com.example.itsstudytime.notifications.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +50,7 @@ import com.example.itsstudytime.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -65,26 +69,39 @@ public class MainActivity extends AppCompatActivity {
     static EsameDB db;
     static CoordinatorLayout cL;
     public static final String CHANNEL_ID = "CHANNEL_ID";
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
+    private static SharedPreferences prefs;
 
-    @SuppressLint("WrongThread")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         createNotificationChannel();
 
-        prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        editor = prefs.edit();
+        /*
+        Recupero del tema selezionato nelle impostazioni
+         */
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String theme = prefs.getString("list_preference_1", "default");
+        if(theme.equals("dark")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else if(theme.equals("default")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        } else if(theme.equals("white")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         setSupportActionBar(binding.toolbar);
 
         cL = findViewById(R.id.main_layout);
+
+        if(!prefs.getBoolean("message", false)) {
+            MessageDialog md = new MessageDialog();
+            md.show(getSupportFragmentManager(), "welcome_message");
+        }
 
         db = Room.databaseBuilder(getApplicationContext(), EsameDB.class, "db_esame").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         recyclerView = findViewById(R.id.id_recview);
@@ -142,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
                 EsamePickerFragment example = new EsamePickerFragment();
                 example.show(getSupportFragmentManager(), "nuovo_esame");
-
 
             }
         });
@@ -303,7 +319,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -317,5 +332,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static void nukeEsami() {
+        db.esameDAO().nukeEsami();
+        db.clearAllTables();
+    }
+
+    public static class MessageDialog extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+            builder.setView(R.layout.welcome_dialog_layout);
+            builder.setPositiveButton(getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    CheckBox ch = (CheckBox) getDialog().findViewById(R.id.message_checkbox);
+                    if(ch.isChecked()) {
+                        prefs.edit().putBoolean("message", true).apply();
+                    }
+                }
+            });
+
+            setCancelable(false);
+            return builder.create();
+        }
+    }
 
 }

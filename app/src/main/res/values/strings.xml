@@ -28,7 +28,7 @@
     <string name="empty_grade">You must give a valid grade. Retry!</string>
     <string name="start">Start</string>
     <string name="pause">Pause</string>
-    <string name="reset" translatable="false">Reset</string>
+    <string name="reset">Reset</string>
     <string name="lode">Cum Laude</string>
     <string name="duplicate">Can\'t add a new exam with a duplicate name!</string>
     <string name="exam_mail">My Exam</string>
@@ -38,6 +38,18 @@
         ItsStudyTime works also as an exam planner with unique features that allow to store, check and share exam data.\n\n
         Be productive without overworking yourself. Prepare your next exam with ItsStudyTime!
      </string>
+    <string name="theme">Select a theme</string>
+    <string name="aspect">Aspect</string>
+    <string name="data">Data</string>
+    <string name="erase">Erase Exams</string>
+    <string name="dark">Dark</string>
+    <string name="def">Default</string>
+    <string name="white">White</string>
+    <string name="confirm">Are you sure about erasing your exams?</string>
+    <string name="welcome">Welcome!</string>
+    <string name="welcome_message">Add your next exams to the list and start preparing them with ItsStudyTime</string>
+    <string name="show_message">Don\'t show this message anymore</string>
+    <string name="retake">Get back into studying with ItsStudyTime!</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

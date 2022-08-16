@@ -28,6 +28,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 import androidx.room.Room;
 
 import com.example.itsstudytime.database.Esame;
@@ -55,7 +56,7 @@ public class DetailedExamList extends AppCompatActivity {
     private Chronometer chronometer;
     private long pauseOffset;
     private long oldOffset;
-    private boolean running;
+    public boolean running;
     private TextView setHours;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -65,7 +66,7 @@ public class DetailedExamList extends AppCompatActivity {
     private Button start;
     private Button pause;
     private Button reset;
-    private Button letsStudy;
+    private static Button letsStudy;
     private  DecimalFormat df;
 
     @Override
@@ -81,7 +82,7 @@ public class DetailedExamList extends AppCompatActivity {
         intent = getIntent();
         esame = (Esame) intent.getSerializableExtra(SERIA);
 
-        prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         editor = prefs.edit();
 
         cL = findViewById(R.id.details_cl);
@@ -92,6 +93,7 @@ public class DetailedExamList extends AppCompatActivity {
 
         df = new DecimalFormat("#.###");
         df.setRoundingMode(RoundingMode.CEILING);
+
         double hours  = (double) esame.getStudyTime() / (1000*60*60);
         setHours.setText("" + df.format(hours));
 
@@ -309,6 +311,7 @@ public class DetailedExamList extends AppCompatActivity {
                         }
                         checkSuperato.setVisibility(View.GONE);
                         printVoto.setVisibility(View.VISIBLE);
+                        letsStudy.setVisibility(View.GONE);
                         MainActivity.db.esameDAO().update(MainActivity.adapter.getEsami().get(position));
                     }
                 }
@@ -364,9 +367,9 @@ public class DetailedExamList extends AppCompatActivity {
 
             start.setVisibility(View.VISIBLE);
 
-            /*
-            Mette in pausa il NotificationService
-             */
+            PendingIntent pendingIntent = requestNotifService(false);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.cancel(pendingIntent);
             try {
                 if(SERVICE_RUNNING) {
                     requestNotifService(true).send();
@@ -384,12 +387,10 @@ public class DetailedExamList extends AppCompatActivity {
 
             double hours  = (double) esame.getStudyTime() / (1000*60*60);
             setHours.setText("" + df.format(hours));
+
             running = false;
 
         } else {
-            /*
-            Il service viene fermato a priori
-             */
             try {
                 if(SERVICE_RUNNING) {
                     requestNotifService(true).send();
@@ -428,11 +429,11 @@ public class DetailedExamList extends AppCompatActivity {
             lode = "L";
         }
         double hours  = (double) esame.getStudyTime() / (1000*60*60);
-        String message = "Nome esame: " + esame.getNome() + " \n" +
-                "Data: " + DateFormatter.formatDate(esame.getData()) + " \n" +
-                "Tempo di studio: " + df.format(hours) + " ore \n" +
-                "Voto: " + esame.getVoto() + lode + " \n\n" +
-                "Riprendi a studiare con ItsStudyTime!";
+        String message = getResources().getString(R.string.exam) + ": " + esame.getNome() + " \n" +
+                getResources().getString(R.string.date) + " " + DateFormatter.formatDate(esame.getData()) + " \n" +
+                getResources().getString(R.string.study_time) + " " + df.format(hours) + " \n" +
+                getResources().getString(R.string.grade) + " " + esame.getVoto() + lode + " \n\n" +
+                getResources().getString(R.string.retake);
         intent.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(intent);
     }

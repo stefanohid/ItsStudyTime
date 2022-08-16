@@ -33,39 +33,11 @@ import java.util.Calendar;
 public class NotificationService extends Service {
     public static boolean SERVICE_RUNNING;
 
-//    public NotificationService() {
-//        super("NotificationService");
-//    }
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-//    @RequiresApi(api = Build.VERSION_CODES.O)
-//    @Override
-//    protected void onHandleIntent(Intent intent) {
-//
-//
-//        Notification notif = new Notification.Builder(this, CHANNEL_ID)
-//                .setContentTitle("My Title")
-//                .setContentText("This is the Body")
-//                .setSmallIcon(R.drawable.icons8_notification_24)
-//                .setPriority(Notification.PRIORITY_HIGH)
-//                .build();
-//
-////        Intent notifyIntent = new Intent(this, DetailedExamList.class);
-////        PendingIntent pendingIntent = PendingIntent.getActivity(this, 2, notifyIntent, PendingIntent.FLAG_IMMUTABLE);
-//////                     to be able to launch your activity from the notification
-////        builder.setContentIntent(pendingIntent);
-////        Notification notificationCompat = builder.build();
-////        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
-////
-////        managerCompat.notify(1, notificationCompat);
-//
-//        startForeground(1, notif);
-//    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -84,7 +56,7 @@ public class NotificationService extends Service {
             Notification notif = new Notification.Builder(this, CHANNEL_ID)
                     .setContentTitle("Break Time")
                     .setContentText("È tempo di fare una pausa! Puoi riprendere lo studio tra 20 minuti.")
-                    .setSmallIcon(R.drawable.icons8_notification_24)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setPriority(Notification.PRIORITY_HIGH)
                     .setContentIntent(pendingIntent)
                     .build();

@@ -27,4 +27,17 @@
 DeskTime ha formulato una teoria per la produttività basata sulla proporzione 52:17 lavoro / riposo che mostra in che modo le persone più produttive al mondo hanno successo quotidianamente. Quest\'app applica questa teoria alle sessioni di studio, in quanto un\'ora di dedicazione ininterrotta viene compensata con un riposo di 20 minuti. ItsStudyTime è anche un pianificatore di esami con funzionalità uniche che consentono di salvare, controllare e condividere dati di esami.\n\n
 Sii produttivo senza sovraccariccare te stesso. Prepara il tuo prossimo esame con ItsStudyTime!
     </string>
+    <string name="theme">"Scegli un tema "</string>
+    <string name="aspect">Aspetto</string>
+    <string name="data">Dati</string>
+    <string name="erase">Cancella Esami</string>
+    <string name="dark">Scuro</string>
+    <string name="def">Predefinito</string>
+    <string name="white">Chiaro</string>
+    <string name="reset">Azzera</string>
+    <string name="confirm">Confermi di voler cancellare i tuoi esami?</string>
+    <string name="welcome">Benvenuto!</string>
+    <string name="welcome_message">Aggiungi i tuoi prossimi esami alla lista e comincia a prepararli con ItsStudyTime</string>
+    <string name="show_message">Non mostrare più questo messaggio</string>
+    <string name="retake">Riprendi a studiare con ItsStudyTime!</string>
 </resources>

@@ -15,10 +15,10 @@ public class DateFormatter {
 
             DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH);
             DateTimeFormatter formatIt = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ITALIAN);
-            if (Locale.getDefault().getLanguage().contentEquals("en")) {
-                return format.format(ld);
-            } else {
+            if (Locale.getDefault().getLanguage().contentEquals("it")) {
                 return formatIt.format(ld);
+            } else {
+                return format.format(ld);
             }
         }
        return null;
