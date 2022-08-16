@@ -22,7 +22,9 @@
     <string name="pause">Pausa</string>
     <string name="duplicate">Non puoi aggiungere un nuovo esame con un nome duplicato!</string>
     <string name="exam_mail">Il Mio Esame</string>
-    <string name="aboutus">"         La concentrazione è chiave per ottenere buoni risultati nello studio, così tanto come essere capaci di pianificare correttamente ogni sessione di studio. Tuttavia, la concentrazione necessita di un riposo una volta ogni tanto, specialmente per le persone che tendono a distrarsi facilmente.   DeskTime ha formulato una teoria per la produttività basata sulla proporzione 52:17 lavoro / riposo che mostra in che modo le persone più produttive al mondo hanno successo quotidianamente. Quest'app applica questa teoria alle sessioni di studio, in quanto un'ora di attvità ininterrotta viene compensata con un riposo di 20 minuti. ItsStudyTime è anche un pianificatore di esami con funzionalità uniche che consentono di salvare, controllare e condividere dati di esami.   Sii produttivo senza sovraccariccare te stesso. Prepara il tuo prossimo esame con ItsStudyTime!     "</string>
+    <string name="aboutus">La concentrazione è chiave per ottenere buoni risultati nello studio, così tanto come essere capaci di pianificare correttamente ogni sessione di studio. Tuttavia, la concentrazione necessita di un riposo una volta ogni tanto, specialmente per le persone che tendono a distrarsi facilmente.\n\n
+        DeskTime ha formulato una teoria per la produttività basata sulla proporzione 52:17 lavoro / riposo che mostra in che modo le persone più produttive al mondo hanno successo quotidianamente. Quest\'app applica questa teoria alle sessioni di studio, in quanto un\'ora di attvità ininterrotta viene compensata con un riposo di 20 minuti. ItsStudyTime è anche un pianificatore di esami con funzionalità uniche che consentono di salvare, controllare e condividere dati di esami.\n\n
+        Sii produttivo senza sovraccariccare te stesso. Prepara il tuo prossimo esame con ItsStudyTime!</string>
     <string name="theme">"Scegli un tema "</string>
     <string name="aspect">Aspetto</string>
     <string name="data">Dati</string>
