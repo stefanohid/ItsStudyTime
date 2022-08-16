@@ -51,8 +51,8 @@
 
     <Button
         android:id="@+id/start_button"
-        android:layout_width="97dp"
-        android:layout_height="56dp"
+        android:layout_width="110dp"
+        android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:onClick="startChronometer"
         android:text="@string/start"
@@ -63,8 +63,8 @@
 
     <Button
         android:id="@+id/pause_button"
-        android:layout_width="97dp"
-        android:layout_height="56dp"
+        android:layout_width="110dp"
+        android:layout_height="54dp"
         android:layout_marginTop="10dp"
         android:onClick="pauseChronometer"
         android:text="@string/pause"
@@ -76,8 +76,8 @@
 
     <Button
         android:id="@+id/reset_button"
-        android:layout_width="97dp"
-        android:layout_height="56dp"
+        android:layout_width="110dp"
+        android:layout_height="54dp"
         android:layout_marginTop="10dp"
         android:cursorVisible="false"
         android:onClick="resetChronometer"

@@ -16,7 +16,6 @@
     <string name="negative_button">Cancel</string>
     <string name="exam_snackbar">Exam successfully set on</string>
     <string name="good_luck">Good Luck!</string>
-    <string name="exam_details">Set Details</string>
     <string name="grade">Grade:</string>
     <string name="study_time">Study time (hours):</string>
     <string name="empty_string">You must give a name to your exam. Retry!</string>
@@ -26,7 +25,7 @@
     <string name="lets_study">Let\'s study!</string>
     <string name="set_grade">Congratulations! What grade did you get?</string>
     <string name="empty_grade">You must give a valid grade. Retry!</string>
-    <string name="start">Start</string>
+    <string name="start">Restart</string>
     <string name="pause">Pause</string>
     <string name="reset">Reset</string>
     <string name="lode">Cum Laude</string>
@@ -50,20 +49,5 @@
     <string name="welcome_message">Add your next exams to the list and start preparing them with ItsStudyTime</string>
     <string name="show_message">Don\'t show this message anymore</string>
     <string name="retake">Get back into studying with ItsStudyTime!</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 </resources>

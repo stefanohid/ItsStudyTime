@@ -1,8 +1,10 @@
 package com.example.itsstudytime;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -44,6 +46,7 @@ public class Settings extends AppCompatActivity implements SharedPreferences.OnS
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
+
     }
 
     @Override
@@ -80,8 +83,11 @@ public class Settings extends AppCompatActivity implements SharedPreferences.OnS
                 });
 
                 builder.setCancelable(false);
-                builder.create();
-                builder.show();
+                if(!(isFinishing()))
+                {
+                    builder.create().show();
+                }
+
             }
         }
 

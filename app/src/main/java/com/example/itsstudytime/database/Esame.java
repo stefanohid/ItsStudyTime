@@ -29,10 +29,6 @@ public class Esame implements Serializable {
     @ColumnInfo(name = "isPrevious")
     private boolean isPrevious;
 
-    @ColumnInfo(name = "paused_activity")
-    @TypeConverters({TimestampConverter.class})
-    public String pauseActivity;
-
     @ColumnInfo(name = "study_time")
     public Long studyTime;
 
@@ -88,14 +84,6 @@ public class Esame implements Serializable {
 
     public void setPrevious(boolean previous) {
         isPrevious = previous;
-    }
-
-    public String getPauseActivity() {
-        return pauseActivity;
-    }
-
-    public void setPauseActivity(String pauseActivity) {
-        this.pauseActivity = pauseActivity;
     }
 
     public Long getStudyTime() {
