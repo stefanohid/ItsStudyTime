@@ -49,5 +49,6 @@
     <string name="welcome_message">Add your next exams to the list and start preparing them with ItsStudyTime</string>
     <string name="show_message">Don\'t show this message anymore</string>
     <string name="retake">Get back into studying with ItsStudyTime!</string>
+    <string name="notif_break">It\'s time to take a break! You can get back into studying in 20 minutes.</string>
 
 </resources>

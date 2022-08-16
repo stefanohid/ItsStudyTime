@@ -36,4 +36,5 @@
     <string name="welcome_message">Aggiungi i tuoi prossimi esami alla lista e comincia a prepararli con ItsStudyTime</string>
     <string name="show_message">Non mostrare più questo messaggio</string>
     <string name="retake">Riprendi a studiare con ItsStudyTime!</string>
+    <string name="notif_break">È tempo di fare una pausa! Puoi riprendere lo studio tra 20 minuti.</string>
 </resources>

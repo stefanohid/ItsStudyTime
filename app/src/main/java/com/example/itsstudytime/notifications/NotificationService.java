@@ -55,7 +55,7 @@ public class NotificationService extends Service {
 
             Notification notif = new Notification.Builder(this, CHANNEL_ID)
                     .setContentTitle("Break Time")
-                    .setContentText("È tempo di fare una pausa! Puoi riprendere lo studio tra 20 minuti.")
+                    .setContentText(getResources().getString(R.string.notif_break))
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setPriority(Notification.PRIORITY_HIGH)
                     .setContentIntent(pendingIntent)
